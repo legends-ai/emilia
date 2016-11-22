@@ -4,5 +4,5 @@ BAREBONES_SERVICES := charon
 barebones-pull:
 	docker-compose pull $(BAREBONES_SERVICES)
 
-barebones-start:
-	docker-compose start $(BAREBONES_SERVICES)
+barebones-up:
+	docker-compose up $(BAREBONES_SERVICES)
