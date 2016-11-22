@@ -1,0 +1,13 @@
+charon:
+  image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/charon:latest
+  ports:
+    - 4609:4609
+    - 4610:4610
+
+# Our shitty databases
+lucinda-cache:
+  image: redis
+
+# cassandra
+cassandra:
+  image: cassandra
