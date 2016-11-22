@@ -2,8 +2,11 @@ charon:
   image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/charon:latest
   entrypoint: ./charon
   ports:
-    - 4609:4609
-    - 4610:4610
+    - 5609:5609
+    - 5610:5610
+  environment:
+    - CHARON_APIKEY
+    - CHARON_MAX_RATE='3334000ns'
 
 # Our shitty databases
 lucinda-cache:
