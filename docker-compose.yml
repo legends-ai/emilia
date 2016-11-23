@@ -1,12 +1,37 @@
+athena:
+  image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/athena:latest
+  links:
+    - cassandra
+
+bacchus:
+  image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
+  entrypoint: ./bacchus
+  depends_on:
+    - charon
+  ports:
+    - "9730:9730"
+    - "9731:9731"
+  links:
+    - bacchus-queue
+
 charon:
   image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/charon:latest
   entrypoint: ./charon
   ports:
-    - 5609:5609
-    - 5610:5610
+    - "5609:5609"
+    - "5610:5610"
   environment:
     - CHARON_APIKEY
     - CHARON_MAX_RATE='3334000ns'
+
+helios:
+  image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/helios:latest
+  depends_on:
+    - lucinda
+  entrypoint: ./helios
+  ports:
+    - "7921:7921"
+    - "7922:7922" 
 
 lucinda:
   image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/lucinda:latest
@@ -15,13 +40,19 @@ lucinda:
     - -jar
     - /app/lucinda-assembly.jar
     - --lucinda_port=45045
+  links:
+    - cassandra
+    - lucinda-cache
   ports:
-    - 45045:45045
-    - 45046:45046
+    - "45045:45045"
+    - "45046:45046"
 
 # Our shitty databases
 lucinda-cache:
-  image: redis
+  image: redis:3.2.5
+
+bacchus-queue:
+  image: redis:3.2.5
 
 # cassandra
 cassandra:
