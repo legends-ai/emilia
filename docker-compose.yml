@@ -8,6 +8,17 @@ charon:
     - CHARON_APIKEY
     - CHARON_MAX_RATE='3334000ns'
 
+lucinda:
+  image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/lucinda:latest
+  entrypoint:
+    - java
+    - -jar
+    - /app/lucinda-assembly.jar
+    - --lucinda_port=45045
+  ports:
+    - 45045:45045
+    - 45046:45046
+
 # Our shitty databases
 lucinda-cache:
   image: redis
