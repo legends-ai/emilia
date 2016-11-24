@@ -1,22 +1,32 @@
 version: '2'
 services:
   athena:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/athena:latest
-    links:
-      - cassandra
+    image: ecr.asuna.io/athena:latest
+    links: cassandra
 
   bacchus:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
+    image: ecr.asuna.io/bacchus:latest
     entrypoint: ./bacchus
     ports:
       - "9730:9730"
       - "9731:9731"
     links:
       - bacchus-queue
+      - cassandra
       - charon
+    environment:
+      - BACCHUS_ATHENA_HOSTS=cassandra:7000
+      - BACCHUS_CHARON_HOST=charon:5609
+      - BACCHUS_REDIS_HOST=bacchus-queue:6379
+
+  bacchus-queue:
+    image: redis:3.2.5
+
+  cassandra:
+    image: cassandra:3.9
 
   charon:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/charon:latest
+    image: ecr.asuna.io/charon:latest
     entrypoint: ./charon
     ports:
       - "5609:5609"
@@ -26,16 +36,18 @@ services:
       - CHARON_MAX_RATE='3334000ns'
 
   helios:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/helios:latest
+    image: ecr.asuna.io/helios:latest
     depends_on:
       - lucinda
-    entrypoint: ./helios
+    entrypoint:
+      - ./helios
+      - --lucinda_host=lucinda:45045
     ports:
       - "7921:7921"
       - "7922:7922" 
 
   lucinda:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/lucinda:latest
+    image: ecr.asuna.io/lucinda:latest
     entrypoint:
       - java
       - -jar
@@ -50,9 +62,3 @@ services:
 
   lucinda-cache:
     image: redis:3.2.5
-
-  bacchus-queue:
-    image: redis:3.2.5
-
-  cassandra:
-    image: cassandra
