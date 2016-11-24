@@ -2,7 +2,8 @@ version: '2'
 services:
   athena:
     image: ecr.asuna.io/athena:latest
-    links: cassandra
+    links:
+      - cassandra
 
   bacchus:
     image: ecr.asuna.io/bacchus:latest
@@ -24,7 +25,8 @@ services:
 
   cassandra:
     image: cassandra:3.9
-    volumes: /asuna/volume0:/var/lib/cassandra
+    volumes:
+      - /asuna/volume0:/var/lib/cassandra
 
   charon:
     image: ecr.asuna.io/charon:latest
