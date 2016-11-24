@@ -1,12 +1,7 @@
 version: '2'
 services:
-  athena:
-    image: ecr.asuna.io/athena:latest
-    links:
-      - cassandra
-
   bacchus:
-    image: ecr.asuna.io/bacchus:latest
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
     entrypoint: ./bacchus
     ports:
       - "9730:9730"
@@ -29,7 +24,7 @@ services:
       - /asuna/volume0:/var/lib/cassandra
 
   charon:
-    image: ecr.asuna.io/charon:latest
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/charon:latest
     entrypoint: ./charon
     ports:
       - "5609:5609"
@@ -39,7 +34,7 @@ services:
       - CHARON_MAX_RATE='3334000ns'
 
   helios:
-    image: ecr.asuna.io/helios:latest
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/helios:latest
     depends_on:
       - lucinda
     entrypoint:
@@ -50,7 +45,7 @@ services:
       - "7922:7922" 
 
   lucinda:
-    image: ecr.asuna.io/lucinda:latest
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/lucinda:latest
     entrypoint:
       - java
       - -jar
