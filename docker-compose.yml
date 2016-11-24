@@ -24,6 +24,7 @@ services:
 
   cassandra:
     image: cassandra:3.9
+    volumes: /asuna/volume0:/var/lib/cassandra
 
   charon:
     image: ecr.asuna.io/charon:latest
