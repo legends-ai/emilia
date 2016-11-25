@@ -11,7 +11,7 @@ services:
       - cassandra
       - charon
     environment:
-      - BACCHUS_ATHENA_HOSTS=cassandra:7000
+      - BACCHUS_ATHENA_HOSTS=cassandra
       - BACCHUS_CHARON_HOST=charon:5609
       - BACCHUS_REDIS_HOST=bacchus-queue:6379
 
