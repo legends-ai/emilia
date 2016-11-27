@@ -65,3 +65,19 @@ services:
 
   lucinda-cache:
     image: redis:3.2.5
+
+  vulgate:
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/vulgate:latest
+    entrypoint:
+      - java
+      - -jar
+      - /app/vulgate-assembly.jar
+      - --vulgate_port=6205
+    links:
+      - vulgate-cache
+    ports:
+      - "6205:6205"
+      - "6206:6206"
+
+  vulgate-cache:
+    image: redis:3.2.5
