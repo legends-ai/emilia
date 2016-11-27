@@ -2,6 +2,15 @@ version: '2'
 services:
   athena:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/athena:latest
+    entrypoint:
+      - spark-submit
+      - --conf
+      - spark.cassandra.connection.host=127.0.0.1
+      - --class
+      - ai.legends.athena.Main
+      - --master
+      - local[4]
+      - artifactTargetPath
 
   bacchus:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
