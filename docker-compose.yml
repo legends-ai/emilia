@@ -72,8 +72,13 @@ services:
       - java
       - -jar
       - /app/vulgate-assembly.jar
+      - --charon_host=charon
+      - --charon_port=5609
       - --vulgate_port=6205
+      - --redis_host=vulgate-cache
+      - --redis_port=6379
     links:
+      - charon
       - vulgate-cache
     ports:
       - "6205:6205"
