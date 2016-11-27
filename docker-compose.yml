@@ -10,7 +10,7 @@ services:
       - ai.legends.athena.Main
       - --master
       - local[4]
-      - artifactTargetPath
+      - target/scala-2.11/athena-assembly.jar
 
   bacchus:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
