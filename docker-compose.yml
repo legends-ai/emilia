@@ -57,9 +57,14 @@ services:
       - java
       - -jar
       - /app/lucinda-assembly.jar
+      - --cassandra_hosts=cassandra
+      - --redis_host=lucinda-cache
+      - --vulgate_host=vulgate
+      - --vulgate_port=6205
     links:
       - cassandra
       - lucinda-cache
+      - vulgate
     ports:
       - "45045:45045"
       - "45046:45046"
