@@ -36,7 +36,7 @@ services:
       - "5610:5610"
     environment:
       - CHARON_APIKEY
-      - CHARON_MAXRATE='3334000ns'
+      - CHARON_MAXRATE='3.334ms'
 
   helios:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/helios:latest
