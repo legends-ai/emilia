@@ -5,12 +5,14 @@ services:
     entrypoint:
       - spark-submit
       - --conf
-      - spark.cassandra.connection.host=127.0.0.1
+      - spark.cassandra.connection.host=cassandra
       - --class
       - ai.legends.athena.Main
       - --master
       - local[4]
       - /app/athena-assembly.jar
+    links:
+      - cassandra
 
   bacchus:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
