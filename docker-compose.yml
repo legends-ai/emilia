@@ -1,5 +1,8 @@
 version: '2'
 services:
+  athena:
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/athena:latest
+
   bacchus:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
     entrypoint: ./bacchus
