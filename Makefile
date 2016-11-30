@@ -5,4 +5,4 @@ barebones-pull:
 	docker-compose pull $(BAREBONES_SERVICES)
 
 barebones-up:
-	docker-compose up $(BAREBONES_SERVICES)
+	docker-compose up -d $(BAREBONES_SERVICES)
