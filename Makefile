@@ -1,4 +1,4 @@
-BAREBONES_SERVICES := charon
+BAREBONES_SERVICES := helios charon vulgate lucinda
 
 # Barebones is all daemons that do not populate data.
 barebones-pull:
