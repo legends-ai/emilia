@@ -56,11 +56,13 @@ services:
 
   helios:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/helios:latest
-    depends_on:
-      - lucinda
     entrypoint:
       - ./helios
       - --lucinda_host=lucinda:45045
+      - --vulgate_host=vulgate:6205
+    links:
+      - lucinda
+      - vulgate
     ports:
       - "7921:7921"
       - "7922:7922" 
