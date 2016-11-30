@@ -15,3 +15,6 @@ lucinda-rediscli:
 
 cqlsh:
 	docker run -ti cassandra:3.4 cqlsh 172.17.0.1 --cqlversion="3.4.2"
+
+cfstats:
+	docker-compose exec cassandra nodetool cfstats
