@@ -67,6 +67,12 @@ services:
       - "7921:7921"
       - "7922:7922" 
 
+  kafka:
+    image: spotify/kafka
+    ports:
+      - "2181:2181"
+      - "9092:9092"
+
   lucinda:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/lucinda:latest
     entrypoint:
