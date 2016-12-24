@@ -71,6 +71,16 @@ services:
       - "2181:2181"
       - "9092:9092"
 
+  legends.ai:
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/legends.ai:latest
+    entrypoint:
+      - node
+      - build/server.js
+    ports:
+      - "7448:7448"
+    environment:
+      - PORT=7448
+
   lucinda:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/lucinda:latest
     entrypoint:
