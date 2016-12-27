@@ -102,6 +102,20 @@ services:
   lucinda-cache:
     image: redis:3.2.5
 
+  totsuki:
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/totsuki:latest
+    entrypoint:
+      - spark-submit
+      - --class
+      - ai.legends.totsuki.Main
+      - --master
+      - local[4]
+      - /app/totsuki-assembly.jar
+      - NA
+      - kafka:9092
+    links:
+      - kafka
+
   vulgate:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/vulgate:latest
     entrypoint:
