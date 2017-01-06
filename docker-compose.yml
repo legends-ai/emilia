@@ -67,6 +67,23 @@ services:
       - "7921:7921"
       - "7922:7922" 
 
+  jibril:
+    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/jibril:latest
+    entrypoint:
+      - java
+      - -jar
+      - /app/jibril.jar
+      - --lock_bucket=athena_locks_staging
+      - --matches_bucket=matches_staging
+      - --fragments_bucket=totsuki_fragments_staging
+      - --cassandra_hosts=cassandra
+    ports:
+      - "30493:30493"
+      - "30494:30494"
+    links:
+      - cassandra
+
+
   legends.ai:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/legends.ai:latest
     entrypoint:
