@@ -24,10 +24,12 @@ services:
       - bacchus-queue
       - cassandra
       - charon
+      - totsuki
     environment:
       - BACCHUS_ATHENA_HOSTS=cassandra
       - BACCHUS_CHARON_HOST=charon:5609
       - BACCHUS_REDIS_HOST=bacchus-queue:6379
+      - BACCHUS_TOTSUKI_HOST=totsuki:21215
 
   bacchus-queue:
     image: redis:3.2.5
@@ -65,12 +67,6 @@ services:
       - "7921:7921"
       - "7922:7922" 
 
-  kafka:
-    image: spotify/kafka
-    ports:
-      - "2181:2181"
-      - "9092:9092"
-
   legends.ai:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/legends.ai:latest
     entrypoint:
@@ -105,16 +101,13 @@ services:
   totsuki:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/totsuki:latest
     entrypoint:
-      - spark-submit
-      - --class
-      - ai.legends.totsuki.Main
-      - --master
-      - local[4]
+      - java
+      - -jar
       - /app/totsuki-assembly.jar
-      - NA
-      - kafka:9092
-    links:
-      - kafka
+      - --bucket=totsuki_fragments_staging
+    ports:
+      - "21215:21215"
+      - "21216:21216"
 
   vulgate:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/vulgate:latest
