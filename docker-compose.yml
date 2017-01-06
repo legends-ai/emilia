@@ -73,9 +73,9 @@ services:
       - java
       - -jar
       - /app/jibril.jar
-      - --lock_bucket=athena_locks_dev
-      - --matches_bucket=matches_dev
-      - --fragments_bucket=totsuki_fragments_dev
+      - --lock_bucket=athena-locks-dev
+      - --matches_bucket=matches-dev
+      - --fragments_bucket=totsuki-fragments-dev
       - --cassandra_hosts=cassandra
     ports:
       - "30493:30493"
@@ -121,7 +121,7 @@ services:
       - java
       - -jar
       - /app/totsuki-assembly.jar
-      - --bucket=totsuki_fragments_dev
+      - --bucket=totsuki-fragments-dev
     ports:
       - "21215:21215"
       - "21216:21216"
