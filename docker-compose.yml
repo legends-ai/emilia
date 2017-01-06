@@ -26,7 +26,7 @@ services:
       - charon
       - totsuki
     environment:
-      - BACCHUS_ATHENA_HOSTS=cassandra
+      - BACCHUS_CASSANDRA_HOSTS=cassandra
       - BACCHUS_CHARON_HOST=charon:5609
       - BACCHUS_REDIS_HOST=bacchus-queue:6379
       - BACCHUS_TOTSUKI_HOST=totsuki:21215
@@ -73,9 +73,9 @@ services:
       - java
       - -jar
       - /app/jibril.jar
-      - --lock_bucket=athena_locks_staging
-      - --matches_bucket=matches_staging
-      - --fragments_bucket=totsuki_fragments_staging
+      - --lock_bucket=athena_locks_dev
+      - --matches_bucket=matches_dev
+      - --fragments_bucket=totsuki_fragments_dev
       - --cassandra_hosts=cassandra
     ports:
       - "30493:30493"
@@ -121,7 +121,7 @@ services:
       - java
       - -jar
       - /app/totsuki-assembly.jar
-      - --bucket=totsuki_fragments_staging
+      - --bucket=totsuki_fragments_dev
     ports:
       - "21215:21215"
       - "21216:21216"
