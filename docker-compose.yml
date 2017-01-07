@@ -126,6 +126,7 @@ services:
       - -jar
       - /app/totsuki-assembly.jar
       - --bucket=totsuki-fragments-dev
+      - --bacchus_keyspace=bacchus_dev
       - --cassandra_hosts=cassandra
     ports:
       - "21215:21215"
