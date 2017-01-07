@@ -126,9 +126,12 @@ services:
       - -jar
       - /app/totsuki-assembly.jar
       - --bucket=totsuki-fragments-dev
+      - --cassandra_hosts=cassandra
     ports:
       - "21215:21215"
       - "21216:21216"
+    links:
+      - cassandra
 
   vulgate:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/vulgate:latest
