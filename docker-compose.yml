@@ -47,9 +47,13 @@ services:
   charon:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/charon:latest
     entrypoint:
-      - ./charon
-      - --riot_key=${CHARON_RIOT_KEY}
-      - --max_rate=3334000ns
+      - java
+      - -jar
+      - /app/charon-assembly.jar
+      - --riot_api_key=${CHARON_RIOT_KEY}
+      - --req_per_10min=180000
+      - --req_per_10sec=3000
+      - --capacity_multiplier=0.8
     ports:
       - "5609:5609"
       - "5610:5610"
