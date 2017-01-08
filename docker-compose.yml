@@ -1,39 +1,5 @@
 version: '2'
 services:
-  athena:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/athena:latest
-    entrypoint:
-      - spark-submit
-      - --conf
-      - spark.cassandra.connection.host=cassandra
-      - --class
-      - ai.legends.athena.Main
-      - --master
-      - local[4]
-      - /app/athena-assembly.jar
-    links:
-      - cassandra
-
-  bacchus:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/bacchus:latest
-    entrypoint: ./bacchus
-    ports:
-      - "9730:9730"
-      - "9731:9731"
-    links:
-      - bacchus-queue
-      - cassandra
-      - charon
-      - totsuki
-    environment:
-      - BACCHUS_CASSANDRA_HOSTS=cassandra
-      - BACCHUS_CHARON_HOST=charon:5609
-      - BACCHUS_REDIS_HOST=bacchus-queue:6379
-      - BACCHUS_TOTSUKI_HOST=totsuki:21215
-
-  bacchus-queue:
-    image: redis:3.2.5
-
   cassandra:
     image: cassandra:3.9
     volumes:
@@ -71,23 +37,6 @@ services:
       - "7921:7921"
       - "7922:7922" 
 
-  jibril:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/jibril:latest
-    entrypoint:
-      - java
-      - -jar
-      - /app/jibril.jar
-      - --lock_bucket=athena-locks-dev
-      - --matches_bucket=matches-dev
-      - --fragments_bucket=totsuki-fragments-dev
-      - --cassandra_hosts=cassandra
-    ports:
-      - "30493:30493"
-      - "30494:30494"
-    links:
-      - cassandra
-
-
   legends.ai:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/legends.ai:latest
     entrypoint:
@@ -118,21 +67,6 @@ services:
 
   lucinda-cache:
     image: redis:3.2.5
-
-  totsuki:
-    image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/totsuki:latest
-    entrypoint:
-      - java
-      - -jar
-      - /app/totsuki-assembly.jar
-      - --bucket=totsuki-fragments-dev
-      - --bacchus_keyspace=bacchus_dev
-      - --cassandra_hosts=cassandra
-    ports:
-      - "21215:21215"
-      - "21216:21216"
-    links:
-      - cassandra
 
   vulgate:
     image: 096202052535.dkr.ecr.us-west-2.amazonaws.com/vulgate:latest
