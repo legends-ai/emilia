@@ -5,7 +5,7 @@ services:
     entrypoint:
       - java
       - -jar
-      - /app/alexandria.jar
+      - /app/alexandria-assembly.jar
       - --keyspace=alexandria_dev
       - --cassandra_hosts=cassandra
       - --matches_bucket=matches-dev
