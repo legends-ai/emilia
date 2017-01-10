@@ -89,7 +89,7 @@ services:
       - java
       - -jar
       - /app/nova-assembly.jar
-      - --redis_host=nova-redis
+      - --redis_host=nova-queue
       - --redis_port=6379
       - --ingest_max_interval=60
       - --ingest_max_batch_size=60
